@@ -84,7 +84,7 @@ done
 
 for newsitem in $(ls -tr $DIRNEWSDIR);
 do
-    if [[ ! -e "$DIRNEWSHOMEDIR$newsitem.read" || $SHOWALL = "true" ]]; then
+	if [[ ! -e "$DIRNEWSHOMEDIR$newsitem.read" || $SHOWALL = "true" || ( -e "$DIRNEWSHOMEDIR$newsitem.read" && ( "$DIRNEWSDIR$newsitem" -nt "$DIRNEWSHOMEDIR$newsitem.read" )) ]]; then
         NEWSSUBMITTER=$(stat -c '%U' $DIRNEWSDIR$newsitem)
         # Check to see if a certain user's news is requested
         if [[ -n "$TARGETUSER" && "$TARGETUSER" != "$NEWSSUBMITTER" ]]; then
