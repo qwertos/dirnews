@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/bin/bash
 
 SCRIPTNAME="news.sh"
 SCRIPTVERSION="1.3"
@@ -85,13 +85,13 @@ done
 for newsitem in $(ls -tr $DIRNEWSDIR);
 do
     if [[ ! -e "$DIRNEWSHOMEDIR$newsitem.read" || $SHOWALL = "true" ]]; then
-        NEWSSUBMITTER=$(stat -f '%Su' $DIRNEWSDIR$newsitem)
+        NEWSSUBMITTER=$(stat -c '%U' $DIRNEWSDIR$newsitem)
         # Check to see if a certain user's news is requested
         if [[ -n "$TARGETUSER" && "$TARGETUSER" != "$NEWSSUBMITTER" ]]; then
             continue
         fi
         NEWSITEMNAME=$(echo $newsitem|sed 's/\.txt$//g'|sed 's/_/ /g')
-        NEWSDATE=$(stat -f %SB -t %F $DIRNEWSDIR$newsitem) 
+        NEWSDATE=$(stat -c %z $DIRNEWSDIR$newsitem) 
         if [[ $NEWSCOUNT != "0" ]]; then
             echo "- - -"
         fi
