@@ -17,7 +17,7 @@ SCRIPTVERSION="1.3"
 #   Some commands (e.g. stat(1)) have different syntax in FreeBSD than GNU versions.
 
 # Configurable variables
-DIRNEWSDIR=/var/spool/dirnews/
+DIRNEWSDIR=${DIRNEWSDIR:=/var/spool/dirnews/}
 DIRNEWSHOMEDIR=$HOME/.dirnews/
 CLEARCOLOR="[0m"          # Clear colors
 ERRORCOLOR="[0;31m"       # Default error color is dark red [0;31m
